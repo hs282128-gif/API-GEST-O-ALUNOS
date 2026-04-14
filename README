@@ -1,0 +1,77 @@
+🎓 Sistema de Gerenciamento de Alunos (Supabase API)
+Este projeto contém uma integração completa em JavaScript Vanilla para gerenciar uma tabela de alunos no Supabase utilizando a API Fetch. Ele permite criar, listar, buscar, atualizar e deletar registros sem a necessidade de bibliotecas externas.
+
+🚀 Tecnologias Utilizadas
+JavaScript (ES6+): Lógica assíncrona com async/await.
+
+Supabase: Banco de dados PostgreSQL com interface REST.
+
+Fetch API: Para comunicação HTTP.
+
+⚙️ Configuração da Ponte
+A conexão é feita através do objeto supabaseConfig. Ele contém a URL do seu projeto e as chaves de autenticação necessárias.
+
+URL: O endpoint da sua tabela alunos.
+
+apikey: Sua chave pública de acesso.
+
+Prefer: O parâmetro return=representation força o banco a devolver o objeto completo após uma alteração.
+
+🛠️ Funções do Sistema
+1. Listar Todos os Alunos
+Busca todos os registros cadastrados na tabela.
+
+Método: GET
+
+Filtro: ?select=* (seleciona todas as colunas).
+
+JavaScript
+listarAlunos();
+2. Criar Novo Aluno
+Adiciona um aluno ao banco de dados.
+
+Método: POST
+
+Entrada: nome e email.
+
+JavaScript
+criarAluno("Paulo Mendonça", "paulo@email.com");
+3. Busca Flexível (Procurar)
+Uma função inteligente que identifica o que você digitou.
+
+Se for número: Busca pelo ID exato (eq).
+
+Se for texto: Busca por partes do Nome (ilike), ignorando maiúsculas e minúsculas.
+
+JavaScript
+procurar(5);        // Busca o ID 5
+procurar("Jorge");  // Busca nomes que contenham "Jorge"
+4. Atualizar Dados
+Existem duas funções para modificação, ambas utilizam o método PATCH para alterar apenas campos específicos:
+
+atualizarEmailAluno(id, novoEmail)
+
+alterarNomeAluno(id, novoNome)
+
+5. Deletar Aluno
+Remove permanentemente um aluno do banco de dados através do seu ID.
+
+Método: DELETE
+
+JavaScript
+deletarAluno(10); // Remove o aluno de ID 10
+⚠️ Observações Importantes
+Filtros de Segurança: Nas funções de atualização e exclusão, a URL utiliza ?id=eq.${id}. Isso é obrigatório para que o banco saiba exatamente qual linha alterar e não afete a tabela inteira.
+
+JSON.stringify: Sempre que enviamos dados (POST ou PATCH), precisamos transformar o objeto JavaScript em texto usando JSON.stringify para que a API consiga ler.
+
+Tratamento de Erros: Todas as funções estão envolvidas em blocos try/catch para capturar falhas de conexão ou erros de validação (como e-mails duplicados).
+
+📝 Como usar
+Copie o código para o seu arquivo .js.
+
+Abra o console do seu navegador.
+
+Chame as funções diretamente para ver os resultados em tempo real no seu banco de dados Supabase!
+
+Este documento serve como base para entender como os dados fluem do seu código para a nuvem! 🌐
